@@ -163,9 +163,6 @@ class HashMap:
             self.put(key, value)
             self._size -= 1
 
-       # self._capacity = new_buckets._capacity
-        #self._buckets = new_buckets._buckets
-
     def table_load(self) -> float:
         """
         Compute the load factor by dividing the number of elements in the
@@ -318,22 +315,6 @@ class HashMap:
                 found_status = True
 
         return new_index
-
-    def quadratic_probing(self, index) -> int:
-        """
-        Helper method to calculate where a key-item should be placed when
-        there is a collision.
-        """
-        count = 0
-        new_index = index
-        while self._buckets[new_index] is not None:
-            count += 1
-            new_index = (index + count ** 2) % self._capacity
-            if new_index > self._capacity:
-                new_index = (new_index - self._capacity)
-
-            if self._buckets[new_index] is None or self._buckets[new_index].is_tombstone is True:
-                return new_index
 
     def __iter__(self):
         """
